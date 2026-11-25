@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HAZARD SPEC 7007</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #090c12;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  padding: 22px;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0 35px;
+}
+.logo { font-size: 21px; font-weight: 800; }
+.status { color: #53d99b; font-size: 12px; }
+.panel {
+  background: #151a24;
+  border: 1px solid #293140;
+  border-radius: 20px;
+  padding: 22px;
+  margin-bottom: 18px;
+}
+h2 { font-size: 17px; margin: 0 0 24px; }
+.dials {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.dial { text-align: center; }
+.knob {
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  margin: auto;
+  background: radial-gradient(circle at 35% 30%, #414b5d, #151923 70%);
+  border: 8px solid #252d3b;
+  box-shadow: 0 0 20px #000, inset 0 0 15px #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+}
+.dial input {
+  width: 100%;
+  margin-top: 17px;
+  accent-color: #55d5bd;
+}
+.dial p { color: #929eaf; font-size: 13px; }
+button {
+  width: 100%;
+  padding: 17px;
+  margin-top: 10px;
+  border: 1px solid #354154;
+  border-radius: 13px;
+  background: #202938;
+  color: white;
+  font-size: 15px;
+}
+button:active { background: #34455a; }
+footer {
+  text-align: center;
+  color: #687587;
+  font-size: 11px;
+  margin: 28px 0;
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">HAZARD 7007</div>
+  <div class="status">● ONLINE</div>
+</header>
+
+<div class="panel">
+  <h2>ПАНЕЛЬ УПРАВЛЕНИЯ</h2>
+  <div class="dials">
+    <div class="dial">
+      <div class="knob" id="v1">50</div>
+      <p>РЕГУЛЯТОР 01</p>
+      <input type="range" min="0" max="100" value="50"
+      oninput="v1.textContent=this.value">
+    </div>
+    <div class="dial">
+      <div class="knob" id="v2">50</div>
+      <p>РЕГУЛЯТОР 02</p>
+      <input type="range" min="0" max="100" value="50"
+      oninput="v2.textContent=this.value">
+    </div>
+  </div>
+</div>
+
+<div class="panel">
+  <h2>УПРАВЛЕНИЕ</h2>
+  <button onclick="alert('Открыты настройки')">НАСТРОЙКИ</button>
+  <button onclick="alert('HAZARD SPEC 7007')">ИНФОРМАЦИЯ</button>
+  <button onclick="resetValues()">СБРОСИТЬ ЗНАЧЕНИЯ</button>
+</div>
+
+<footer>HAZARD SPEC 7007 · VERSION 1.0</footer>
+
+<script>
+const tg = window.Telegram.WebApp;
+tg.ready();
+tg.expand();
+
+function resetValues() {
+  document.querySelectorAll('input[type=range]').forEach((el,i) => {
+    el.value = 50;
+    document.getElementById('v'+(i+1)).textContent = '50';
+  });
+}
+</script>
+</body>
+</html>
